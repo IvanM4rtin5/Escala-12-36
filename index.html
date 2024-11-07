@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Escala de Plantão</title>
+<style>
+h3 {
+    font-size: 20px;
+}
+ul {
+    list-style-type: none;  /* Remove os pontos da lista */
+    padding: 0;  /* Remove o espaçamento interno */
+}
+
+li {
+    padding: 10px;
+	font-size: 16px;
+    background-color: #444;  /* Cor de fundo dos itens */
+    margin-bottom: 5px;
+    border-radius: 5px;
+}
+div{
+	font-size: 20px;
+}
+div button{
+	color:white;
+	background-color:red;
+	font-size: 14px;
+	padding:3px;
+}
+</style>
+</head>
+<body style="background-color: #666666; color:white; text-align: center;">
+    <h2 style="text-align: center; font-size:35px;">Escala de Plantão</h2>
+    <div style="text-align: center;">
+        <label for="dataInicio">Data de início do primeiro plantão:</label>
+        <input type="date" id="dataInicio">
+        <button onclick="gerarEscala()">Gerar Escala</button>
+    </div>
+
+    <!-- <h3> Está presente no HTML inicial -->
+    <h3></h3>
+    
+    <div id="escala"></div>
+
+    <script>
+        function gerarEscala() {
+            var dataInicio = new Date(document.getElementById("dataInicio").value);
+			
+            // Verificar se a data é inválida
+            if (isNaN(dataInicio.getTime())) {
+                alert("Por favor, insira uma data válida!");
+                return;  // Se a data for inválida, o código para a execução da função
+            }			
+			
+            var milisegundosDia = 24 * 60 * 60 * 1000; // quantidade de milisegundos em um dia
+
+            var hoje = new Date();
+            var funcionarios = ["Maria", "João", "Francisco"];
+            var diasPlantao = 1;
+            var diasFolga = 2;
+            var diasTotal = 30;
+            
+            var escalaHTML = "<ul>";
+            
+            // Acessa o <h3> e altera o texto
+            var h3 = document.querySelector('h3');
+            h3.textContent = "Escala de Plantão para o mês"; // Muda o conteúdo do <h3>
+            h3.style.fontSize = '30px'; // Aumenta o tamanho da fonte do <h3>
+            
+            // Preenchendo a escala de plantão
+            for (var i = 0; i < diasTotal; i++) {
+                var funcionarioAtual = i % funcionarios.length; 
+
+                escalaHTML += "<li style='color:white;'>" + funcionarios[funcionarioAtual] + "</li>";
+                
+                var inicioPlantao = new Date(dataInicio.getTime() + (i * milisegundosDia));
+                var fimPlantao = new Date(inicioPlantao.getTime() + diasPlantao * milisegundosDia);
+                var fimFolga = new Date(fimPlantao.getTime() + diasFolga * milisegundosDia);
+                
+                escalaHTML += "<li>Dia " + (i + 1) + ":<br>";
+                escalaHTML += funcionarios[funcionarioAtual] + ": Plantão de " + inicioPlantao.toLocaleDateString('pt-BR') + " a " + fimPlantao.toLocaleDateString('pt-BR') + "<br>";
+            }
+            
+            escalaHTML += "</ul>";
+            document.getElementById("escala").innerHTML = escalaHTML;
+        }
+    </script>
+</body>
+</html>

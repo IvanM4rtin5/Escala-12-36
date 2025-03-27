@@ -1,0 +1,42 @@
+body {
+    background-color: #383bf0;
+    color: white;
+    text-align: center;
+    
+}
+
+h3 {
+    font-size: 20px;
+}
+label {
+    font-size: 22px;
+}
+input {
+    padding: 5px;
+    font-size: 14px;
+    border-radius: 3px;
+    border: none;
+    margin-right: 10px;
+}
+ul {
+    list-style-type: none;  
+    padding: 0;  
+}
+
+li {
+    padding: 10px;
+	font-size: 16px;
+    background-color: #444;  
+    margin-bottom: 5px;
+    border-radius: 5px;
+}
+div{
+	font-size: 20px;
+}
+div button{
+	color:white;
+	background-color:red;
+    border-radius: 5px;
+	font-size: 14px;
+	padding:5px;
+}
